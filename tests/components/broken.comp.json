@@ -1,0 +1,6 @@
+{
+    "name": "brokenComponent1",
+    "type": "component" // introducing a syntax error
+    "version": "1.0.0",
+    "file": "./broken.comp.js"
+}
