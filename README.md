@@ -60,7 +60,7 @@ A definition file can look like this:
 }
 ```
 
-An a component implementation usually looks like this:
+And a component implementation usually looks like this:
 
 ```js
 function create(context) {
@@ -90,5 +90,62 @@ function create(context) {
         init: init,
         destroy: destroy
     };
+}
+
+module.exports = {
+    create: create
+};
+
+```
+
+Components can also communicate using the context as an event bus:
+
+```js
+function create(context) {
+    
+    // Publishing a message with an (optional) payload:
+    context.publish("myComponent/foo", {foo: "bar"});
+    
+    // Subscribing a listener:
+    context.subscribe("otherComponent/foo", listener);
+    
+    // Subscribing a listener that is only called once:
+    context.once("otherComponent/foo", listener);
+    
+    // Removing a listener:
+    context.unsubscribe("otherComponent/foo", listener);
+    
+    function listener(data) {
+        console.log("Received data:", JSON.stringify(data, null, 4));
+    }
+}
+```
+
+If you want to run something once all components have been initialized, subscribe to the
+`app/ready` message using the context.
+
+A component can extend other components using decorators:
+
+```js
+function create(context) {
+    
+    // Decorate a channel:
+    context.decorate("myComponent/foo", function (fn) {
+        return function () {
+            console.log("myComponent/foo was called!");
+            return fn.apply(null, arguments);
+        };
+    });
+    
+    // Decorate all channels:
+    context.decorate(function (fn) {
+        return function () {
+            // ...
+            return fn.apply(null, arguments);
+        };
+    });
+    
+    // Removing a decorator:
+    context.removeDecorator("myComponent/foo", /* the decorator */);
 }
 ```
