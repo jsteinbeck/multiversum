@@ -1,11 +1,4 @@
 
-var fs = require("fs");
-var path = require("path");
-var assert = require("assert");
-var semver = require("semver");
-var minimatch = require("minimatch");
-var readDir = require("fs-readdir-recursive");
-
 var CHANNELS = {
     GATHER: "gatherer/gather",
     GATHER_FILE_NAMES: "gatherer/gatherFileNames",
@@ -24,6 +17,8 @@ var EVENTS = {
 
 function create(context) {
     
+    var assert, minimatch, fs, semver, path;
+    
     var gatherer = context.createInterface("gatherer", {
         gather: gather,
         gatherFileNames: gatherFileNames,
@@ -36,11 +31,50 @@ function create(context) {
     });
     
     function init() {
+        
+        var getModule = context.channel("getModule").call;
+        
+        fs = getModule("fs");
+        path = getModule("path");
+        assert = getModule("assert");
+        semver = getModule("semver");
+        minimatch = getModule("minimatch");
+        
         context.connectInterface(gatherer);
     }
     
     function destroy() {
         context.disconnectInterface(gatherer);
+    }
+    
+    function isActualNode(name) {
+        return name[0] !== '.';
+    }
+    
+    function readDir(root, files, prefix) {
+        
+        var dir;
+        
+        prefix = prefix || "";
+        dir = path.join(root, prefix);
+        
+        files = files || [];
+        
+        if (!fs.existsSync(dir)) {
+            return files;
+        }
+        
+        if (fs.statSync(dir).isDirectory())
+            
+            fs.readdirSync(dir).filter(isActualNode).forEach(function (name) {
+                readDir(root, files, path.join(prefix, name));
+            });
+            
+        else {
+            files.push(prefix);
+        }
+        
+        return files;
     }
     
     function unique(value, index, arr) {

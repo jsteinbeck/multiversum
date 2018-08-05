@@ -3,7 +3,7 @@ import { GathererConfig, ComponentList, GathererComponent } from "./gatherer";
 import { Application } from "./app";
 
 /**
- * Bootstraps an application by configuring and using a gatherer instance and adding
+ * Bootstraps an application (for node) by configuring and using a gatherer instance and adding
  * all components that match the specified criteria.
  * 
  * @param rootDirs An array paths of directories containing components

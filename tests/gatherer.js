@@ -7,10 +7,17 @@ var EventEmitter = require("events");
 
 var createHost = require("../host").create;
 var createGatherer = require("../gatherer").create;
+var injectGathererContext = require("../utils/gatherer-context").inject;
 
 function wrapHost(host) {
     
     var emitter = new EventEmitter();
+    
+    host.connect("getModule", function () {
+        return null;
+    });
+    
+    injectGathererContext(host);
     
     return {
         call: host.call,

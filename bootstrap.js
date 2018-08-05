@@ -2,14 +2,24 @@
 var createApp = require("./app").create;
 var createHost = require("./host").create;
 var createGatherer = require("./gatherer").create;
+var injectAppContext = require("./utils/app-context").inject;
+var injectGathererContext = require("./utils/gatherer-context").inject;
 
 function bootstrap(rootDirs, config) {
     
-    var components;
+    var components, gatherer, app;
     
-    var app = createApp();
     var host = createHost();
-    var gatherer = createGatherer(host);
+    
+    host.connect("getModule", function () {
+        return null;
+    });
+    
+    injectGathererContext(host);
+    injectAppContext(host);
+    
+    app = createApp(host);
+    gatherer = createGatherer(host);
     
     var onError = typeof config.onError === "function" ?
         config.onError :

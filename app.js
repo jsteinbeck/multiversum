@@ -1,14 +1,11 @@
 
-var DependencyGraph = require("dependency-graph").DepGraph;
-var createPluginManager = require("./host.js").create;
-
-function create() {
+function create(host) {
     
     var instances, appInitialized;
     
     var components = {};
-    var host = createPluginManager();
     var toBeInitialized = [];
+    var DependencyGraph = host.channel("getModule").call("DependencyGraph");
     var graph = new DependencyGraph({});
     
     var app = host.createInterface("app", {

@@ -1,5 +1,5 @@
 
-import { ChannelFacade } from "./host";
+import { ChannelFacade, PluginHost } from "./host";
 import { ComponentDefinition } from "./gatherer";
 
 /**
@@ -82,4 +82,4 @@ export interface Application extends ChannelFacade {
 /**
  * Creates a new Multiversum application instance.
  */
-export function create(): Application;
+export function create(host: PluginHost): Application;

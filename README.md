@@ -149,3 +149,10 @@ function create(context) {
     context.removeDecorator("myComponent/foo", /* the decorator */);
 }
 ```
+
+## Changelog
+
+* v0.2.0
+  * Changes app and gatherer to use a `getModule(name)` channel to get their dependencies.
+    This allows applications to be bootstrapped in such a way that they don't use node's file
+    system module directly.

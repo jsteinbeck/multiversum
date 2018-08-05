@@ -1,6 +1,6 @@
 {
   "name": "multiversum",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An extensible component architecture for JavaScript",
   "main": "index.js",
   "directories": {
@@ -27,7 +27,6 @@
   "homepage": "https://github.com/jsteinbeck/multiversum#readme",
   "dependencies": {
     "dependency-graph": "^0.7.1",
-    "fs-readdir-recursive": "^1.1.0",
     "minimatch": "^3.0.4",
     "semver": "^5.5.0"
   },
