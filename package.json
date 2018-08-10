@@ -1,6 +1,6 @@
 {
   "name": "multiversum",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An extensible component architecture for JavaScript",
   "main": "index.js",
   "directories": {

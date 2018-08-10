@@ -152,6 +152,9 @@ function create(context) {
 
 ## Changelog
 
+* v0.2.1
+  * Change ComponentDefinition definition to allow `[index: string]: any;`
+
 * v0.2.0
   * Changes app and gatherer to use a `getModule(name)` channel to get their dependencies.
     This allows applications to be bootstrapped in such a way that they don't use node's file

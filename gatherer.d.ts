@@ -46,6 +46,8 @@ export interface GathererConfig {
  */
 export interface ComponentDefinition {
     
+    [index: string]: any;
+    
     /**
      * The name of the component.
      */
