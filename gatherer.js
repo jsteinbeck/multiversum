@@ -64,12 +64,11 @@ function create(context) {
             return files;
         }
         
-        if (fs.statSync(dir).isDirectory())
-            
+        if (fs.statSync(dir).isDirectory()) {
             fs.readdirSync(dir).filter(isActualNode).forEach(function (name) {
                 readDir(root, files, path.join(prefix, name));
             });
-            
+        }
         else {
             files.push(prefix);
         }
