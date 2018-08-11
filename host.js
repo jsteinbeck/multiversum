@@ -357,10 +357,12 @@ function create() {
         
         var bus = new EventEmitter();
         
-        var api = {
-            onError: addErrorHandler,
-            call: callChannel
-        };
+        function api() {
+            return callChannel.apply(null, arguments);
+        }
+        
+        api.onError = addErrorHandler;
+        api.call = callChannel;
         
         function addErrorHandler(fn) {
             bus.on("error", fn);

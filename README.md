@@ -152,8 +152,12 @@ function create(context) {
 
 ## Changelog
 
+* v0.2.2
+  * Changes `ChannelObject` to be callable, so that `host.channel("foo")()` can be used
+    instead of `host.channel("foo").call()`.
+
 * v0.2.1
-  * Change ComponentDefinition definition to allow `[index: string]: any;`
+  * Changes `ComponentDefinition` definition to allow `[index: string]: any;`
 
 * v0.2.0
   * Changes app and gatherer to use a `getModule(name)` channel to get their dependencies.

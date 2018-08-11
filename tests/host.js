@@ -429,11 +429,11 @@ describe("host", function () {
             
             assert.equal(count.bar, 5);
             
-            plugins.channel("test/foo").call();
+            plugins.channel("test/foo")();
             
             assert.equal(count.foo, 2);
             
-            plugins.channel("test/bar").call(3, 5);
+            plugins.channel("test/bar")(3, 5);
             
             assert.equal(count.bar, 10);
         });

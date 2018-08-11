@@ -19,6 +19,7 @@ export interface ChannelCollection {
 }
 
 export interface ChannelObject {
+    (...args): any;
     call(...args): any;
     onError(listener: Function) : ChannelObject; 
 }
