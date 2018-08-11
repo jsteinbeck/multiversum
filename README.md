@@ -152,6 +152,10 @@ function create(context) {
 
 ## Changelog
 
+* v0.2.3
+  * Add `onError` callback to `app/error` event in bootstrapper so that errors thrown during
+    component initialization aren't swallowed silently.
+
 * v0.2.2
   * Changes `ChannelObject` to be callable, so that `host.channel("foo")()` can be used
     instead of `host.channel("foo").call()`.

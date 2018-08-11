@@ -26,6 +26,7 @@ function bootstrap(rootDirs, config) {
         console.error.bind(console);
     
     host.on("error", onError);
+    host.on("app/error", onError);
     gatherer.init();
     
     components = gatherer.resolveComponents(gatherer.gather(rootDirs, config));
