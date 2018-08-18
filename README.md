@@ -3,6 +3,9 @@
 
 A toolbox for implementing an "everything's a plugin" architecture in JavaScript.
 
+**WARNING: This library hasn't reached version 1.0.0 yet and the API might change at any
+time. Using the library in production systems is therefore discouraged at this point.**
+
 ## How it works
 
 Multiversum consists of a plugin host, a component gatherer, a bootstrapper and an application
@@ -151,6 +154,10 @@ function create(context) {
 ```
 
 ## Changelog
+
+* v0.3.1
+  * Fix: Decorator value discarded when not calling `next`
+  * Add warning about chaning API to README
 
 * v0.3.0
   * Change `host.channel(name)` to use the host bus for errors, not a new one.

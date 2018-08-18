@@ -408,6 +408,7 @@ function create() {
     function call(channel, args, onError) {
         
         var result;
+        var nextCalls = 0;
         var version = channel.split("@")[1] || "1.x";
         var channelName = normalizeChannelName(channel);
         var subscribers = prioritize(channelName in channels ? channels[channelName] : {}, version);
@@ -451,8 +452,10 @@ function create() {
             
             function next() {
                 
-                var current;
+                var current, lastCallCount;
                 var value = lastValue;
+                
+                nextCalls += 1;
                 
                 while (decorated.length) {
                     
@@ -472,8 +475,14 @@ function create() {
                     }
                     
                     try {
+                        
+                        lastCallCount = nextCalls;
                         value = current.fn.apply(null, arguments);
                         lastValue = value;
+                        
+                        if (nextCalls === lastCallCount) {
+                            break;
+                        }
                     }
                     catch (error) {
                         if (error && typeof error === "object" && error.mustReThrow) {
