@@ -152,6 +152,9 @@ function create(context) {
 
 ## Changelog
 
+* v0.3.0
+  * Change `host.channel(name)` to use the host bus for errors, not a new one.
+
 * v0.2.3
   * Add `onError` callback to `app/error` event in bootstrapper so that errors thrown during
     component initialization aren't swallowed silently.

@@ -355,8 +355,6 @@ function create() {
     
     function channel(channelName) {
         
-        var bus = new EventEmitter();
-        
         function api() {
             return callChannel.apply(null, arguments);
         }
